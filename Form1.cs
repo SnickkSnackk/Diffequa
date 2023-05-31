@@ -103,5 +103,12 @@ namespace Diffequa
             s = new Form2(InputEqua.Text, steps);
             s.Show();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form3 graf = new Form3();
+            graf.Show();
+            graf.GetFormula(InputEqua.Text,double.Parse(textBox1.Text),double.Parse(textBox3.Text),double.Parse(textBox2.Text),double.Parse(textBox4.Text));
+        }
     }
 }
