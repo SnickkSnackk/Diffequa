@@ -14,9 +14,12 @@ namespace Diffequa
 {
     public partial class Form1 : Form
     {
+        Form2 s = null;
+        List<string> steps = new List<string>();
         public Form1()
         {
             InitializeComponent();
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -26,6 +29,7 @@ namespace Diffequa
 
         private void button1_Click(object sender, EventArgs e)
         {
+            steps.Clear();
             try
             {
                 var equation = InputEqua.Text;
@@ -50,8 +54,10 @@ namespace Diffequa
 
                     x += h;
 
-                    OutputEqua.Text = ($"x = {x.ToString()}, y = {y.ToString()}");
+                    OutputEqua.Text = ($"x = {x}, y = {y}");
+                    steps.Add(OutputEqua.Text);
                 }
+                if (s != null) s.Close();
             }
             catch (System.FormatException) { MessageBox.Show("Одно из значений неверно указано!"); }
             catch (AngouriMath.Core.Exceptions.UnhandledParseException) { MessageBox.Show("Уравнение имеет неверный формат!"); }
@@ -90,6 +96,12 @@ namespace Diffequa
         private void label6_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            s = new Form2(InputEqua.Text, steps);
+            s.Show();
         }
     }
 }
